@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
-from src.model.layers import (
+
+from ddpm_tutorial.ddpm.model.layers import (
     AttentionDownBlock,
     AttentionUpBlock,
     ConvDownBlock,

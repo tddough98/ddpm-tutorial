@@ -2,12 +2,13 @@ from pathlib import Path
 
 import torch
 import torch.nn.functional as F
-from src.config.train import training_config
-from src.data.loader import get_loader
-from src.model.unet import UNet
-from src.scheduler.ddpm import DDPMPipeline
-from src.utils.common import create_images_grid, postprocess
 from tqdm import tqdm
+
+from ddpm_tutorial.ddpm.config.train import training_config
+from ddpm_tutorial.ddpm.data.loader import get_loader
+from ddpm_tutorial.ddpm.model.unet import UNet
+from ddpm_tutorial.ddpm.scheduler.ddpm import DDPMPipeline
+from ddpm_tutorial.ddpm.utils.common import create_images_grid, postprocess
 
 
 def evaluate(config, epoch, pipeline, model):  # noqa: D103

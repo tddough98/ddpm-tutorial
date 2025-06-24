@@ -11,9 +11,7 @@ license = { file = "LICENSE" }
 maintainers = [
   { name = "Thomas Dougherty", email = "tdowlingdougherty@gmail.com" },
 ]
-authors = [
-  { name = "Thomas Dougherty" },
-]
+authors = [ { name = "Thomas Dougherty" } ]
 requires-python = ">=3.10"
 classifiers = [
   "Programming Language :: Python :: 3 :: Only",
@@ -24,13 +22,13 @@ classifiers = [
 ]
 dependencies = [
   "anndata",
+  "datasets",
   # for debug logging (referenced from the issue template)
   "session-info2",
+  "torch",
+  "torchvision",
 ]
-optional-dependencies.dev = [
-  "pre-commit",
-  "twine>=4.0.2",
-]
+optional-dependencies.dev = [ "pre-commit", "twine>=4.0.2" ]
 optional-dependencies.doc = [
   "docutils>=0.8,!=0.18.*,!=0.19.*",
   "ipykernel",
@@ -47,10 +45,7 @@ optional-dependencies.doc = [
   "sphinxcontrib-bibtex>=1",
   "sphinxext-opengraph",
 ]
-optional-dependencies.test = [
-  "coverage",
-  "pytest",
-]
+optional-dependencies.test = [ "coverage", "pytest" ]
 # https://docs.pypi.org/project_metadata/#project-urls
 urls.Documentation = "https://ddpm-tutorial.readthedocs.io/"
 urls.Homepage = "https://github.com/tddough98/ddpm-tutorial"
@@ -83,7 +78,9 @@ features = [ "test" ]
 # If the matrix variable `deps` is set to "pre",
 # set the environment variable `UV_PRERELEASE` to "allow".
 matrix.deps.env-vars = [
-  { key = "UV_PRERELEASE", value = "allow", if = [ "pre" ] },
+  { key = "UV_PRERELEASE", value = "allow", if = [
+    "pre",
+  ] },
 ]
 
 [tool.ruff]
@@ -135,9 +132,7 @@ addopts = [
 
 [tool.coverage.run]
 source = [ "ddpm_tutorial" ]
-omit = [
-  "**/test_*.py",
-]
+omit = [ "**/test_*.py" ]
 
 [tool.cruft]
 skip = [

@@ -1,6 +1,7 @@
 import torch
-from src.utils.common import broadcast
 from tqdm import tqdm
+
+from ddpm_tutorial.ddpm.utils.common import broadcast
 
 
 class DDPMPipeline:  # noqa: D101
