@@ -1,0 +1,19 @@
+width: 32
+height: 32
+channels: 3
+num_classes: 10
+files_location: ~/.cache/torchvision_dataset
+train:
+  _target_: torchvision.datasets.CelebA
+  root: ${dataset.files_location}
+  split: train
+  download: true
+  transform:
+    _target_: torchvision.transforms.ToTensor
+val:
+  _target_: torchvision.datasets.CIFAR10
+  root: ${dataset.files_location}
+  split: valid
+  download: true
+  transform:
+    _target_: torchvision.transforms.ToTensor

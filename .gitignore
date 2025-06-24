@@ -18,3 +18,7 @@ __pycache__/
 # docs
 /docs/generated/
 /docs/_build/
+
+docs/notebooks/models
+docs/notebooks/gen_images
+docs/notebooks/lightning_logs

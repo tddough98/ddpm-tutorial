@@ -1,0 +1,86 @@
+model:
+  _target_: ddpm_tutorial.ddpm.model.ddpm.GaussianDDPM
+  denoiser_module:
+    _target_: ddpm_tutorial.ddpm.model.unet.UNetTimeStep
+    channels:
+    - 1
+    - 32
+    - 64
+    - 64
+    - 96
+    kernel_sizes:
+    - 3
+    - 3
+    - 3
+    - 3
+    strides:
+    - 1
+    - 1
+    - 1
+    - 1
+    paddings:
+    - 1
+    - 1
+    - 1
+    - 1
+    p_dropouts:
+    - 0.1
+    - 0.1
+    - 0.1
+    - 0.1
+    time_embed_size: 100
+    downsample: true
+  T: ${noise_steps}
+  lambda_variational: 0.0001
+  width: ${dataset.width}
+  height: ${dataset.height}
+  logging_freq: 1000
+  input_channels: ${dataset.channels}
+  vlb: false
+  init_step_vlb: 1000
+scheduler:
+  _target_: ddpm_tutorial.ddpm.variance_scheduler.linear.LinearScheduler
+  beta_start: 2.5e-05
+  beta_end: 0.005
+  T: ${noise_steps}
+dataset:
+  width: 28
+  height: 28
+  channels: 1
+  num_classes: 10
+  files_location: ~/.cache/torchvision_dataset
+  train:
+    _target_: torchvision.datasets.MNIST
+    root: ${dataset.files_location}
+    train: true
+    download: true
+    transform:
+      _target_: torchvision.transforms.ToTensor
+  val:
+    _target_: torchvision.datasets.MNIST
+    root: ${dataset.files_location}
+    train: false
+    download: true
+    transform:
+      _target_: torchvision.transforms.ToTensor
+optimizer:
+  _target_: torch.optim.Adam
+  _partial_: true
+  lr: 0.0001
+  weight_decay: 0.0
+batch_size: 128
+noise_steps: 1000
+accelerator: gpu
+devices: null
+gradient_clip_val: 0.0
+gradient_clip_algorithm: norm
+ema: true
+ema_decay: 0.99
+early_stop: true
+patience: 10
+min_delta: 0.0
+checkpoint: null
+seed: 1337
+freq_logging: 100
+freq_logging_norm_grad: 100
+batch_size_gen_images: 64

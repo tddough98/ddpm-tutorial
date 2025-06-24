@@ -1,0 +1,5 @@
+# @package _global_
+
+model:
+  denoiser_module:
+    p_dropouts: [0.3, 0.3, 0.3, 0.3]

@@ -23,9 +23,21 @@ classifiers = [
 dependencies = [
   "anndata",
   "datasets",
+  "einops",
+  "gdown",
+  "hydra-core",
+  "matplotlib",
+  "numpy",
+  "path",
+  "pytest",
+  "pytorch-lightning",
+  "seaborn",
   # for debug logging (referenced from the issue template)
   "session-info2",
+  "tensorboard",
   "torch",
+  "torchmetrics",
+  "torchsummary",
   "torchvision",
 ]
 optional-dependencies.dev = [ "pre-commit", "twine>=4.0.2" ]
