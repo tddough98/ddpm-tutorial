@@ -23,9 +23,9 @@ def postprocess(images):  # noqa: D103
 
 
 def create_images_grid(images, rows, cols):  # noqa: D103
-    images = [Image.fromarray(image) for image in images]
+    images = [Image.fromarray(image.squeeze()) for image in images]
     w, h = images[0].size
-    grid = Image.new("RGB", size=(cols * w, rows * h))
+    grid = Image.new(images[0].mode, size=(cols * w, rows * h))
     for i, image in enumerate(images):
         grid.paste(image, box=(i % cols * w, i // cols * h))
     return grid

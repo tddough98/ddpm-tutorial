@@ -62,10 +62,8 @@ def main():  # noqa: D103
         progress_bar = tqdm(total=len(train_dataloader))
         progress_bar.set_description(f"Epoch {epoch}")
 
-        mean_loss = 0
-
         model.train()
-        for step, batch in enumerate(train_dataloader):
+        for _step, batch in enumerate(train_dataloader):
             original_images = batch["images"].to(training_config.device)
             batch_size = original_images.shape[0]
 
@@ -81,8 +79,6 @@ def main():  # noqa: D103
             # Predict the noise residual
             noise_pred = model(noisy_images, timesteps)
             loss = F.mse_loss(noise_pred, noise)
-            # Calculate new mean on the run without accumulating all the values
-            mean_loss = mean_loss + (loss.detach().item() - mean_loss) / (step + 1)
             loss.backward()
 
             torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
@@ -91,7 +87,7 @@ def main():  # noqa: D103
             optimizer.zero_grad()
 
             progress_bar.update(1)
-            logs = {"loss": mean_loss, "lr": lr_scheduler.get_last_lr()[0], "step": global_step}
+            logs = {"loss": f"{loss:.3f}", "lr": lr_scheduler.get_last_lr()[0], "step": global_step}
             progress_bar.set_postfix(**logs)
             global_step += 1
 

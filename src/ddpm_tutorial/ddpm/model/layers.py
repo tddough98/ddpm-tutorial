@@ -25,7 +25,7 @@ class TransformerPositionalEmbedding(nn.Module):
 
     def forward(self, timestep):  # noqa: D102
         # [bs, d_model]
-        return self.pe_matrix[timestep].to(timestep.device)
+        return self.pe_matrix.to(timestep.device)[timestep]
 
 
 class ConvBlock(nn.Module):  # noqa: D101

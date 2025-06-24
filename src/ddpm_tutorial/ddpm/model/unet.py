@@ -93,7 +93,7 @@ class UNet(nn.Module):
         )
 
         self.output_conv = nn.Sequential(
-            nn.GroupNorm(num_channels=256, num_groups=32), nn.SiLU(), nn.Conv2d(256, 3, 3, padding=1)
+            nn.GroupNorm(num_channels=256, num_groups=32), nn.SiLU(), nn.Conv2d(256, input_channels, 3, padding=1)
         )
 
     def forward(self, input_tensor, time):  # noqa: D102

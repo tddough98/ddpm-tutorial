@@ -28,20 +28,28 @@ pip install ddpm-tutorial
 ```
 -->
 
-1. Install the latest development version:
-
+1. Set up an environment (optional)
 ```bash
-pip install git+https://github.com/tddough98/ddpm-tutorial.git@main
+conda create --name ddpm-tutorial python=3.12
+conda activate ddpm-tutorial
 ```
 
-## Release notes
+1. Clone the repository:
+```bash
+git clone git+https://github.com/tddough98/ddpm-tutorial.git@main
+cd ddpm-tutorial
+```
 
-See the [changelog][].
 
-## Contact
+1. Install from source
 
-For questions and help requests, you can reach out in the [scverse discourse][].
-If you found a bug, please use the [issue tracker][].
+```bash
+pip install -e .
+```
+
+## Run implemented tutorial
+
+
 
 ## Citation
 
