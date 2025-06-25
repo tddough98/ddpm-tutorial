@@ -5,7 +5,7 @@ from IPython.display import display
 from PIL import Image
 from tqdm.auto import tqdm
 
-from .data import frames2vid, get, inverse_transform
+from .data import frames2vid, inverse_transform
 
 
 # Algorithm 2: Sampling
@@ -28,19 +28,19 @@ def reverse_diffusion(model, sd, timesteps=1000, img_shape=(3, 64, 64), num_imag
         leave=False,
     ):
         ##### Exercise 3 #####
-        ts = torch.ones(num_images, dtype=torch.long, device=device) * time_step
-        z = torch.randn_like(x) if time_step > 1 else torch.zeros_like(x)
+        # Reshape the time_step to match the batch size.
 
-        predicted_noise = model(x, ts)
+        # Sample noise z from a standard normal distribution.
 
-        beta_t = get(sd.beta, ts)
-        one_by_sqrt_alpha_t = get(sd.one_by_sqrt_alpha, ts)
-        sqrt_one_minus_alpha_cumulative_t = get(sd.sqrt_one_minus_alpha_cumulative, ts)
+        # Predict the noise in the current image x_t using the model.
 
-        x = (
-            one_by_sqrt_alpha_t * (x - (beta_t / sqrt_one_minus_alpha_cumulative_t) * predicted_noise)
-            + torch.sqrt(beta_t) * z
-        )
+        # Get parameters from diffusion schedule for the current timestep. (Use the `get` function to extract and reshape the values.)
+
+        # Compute the new x using the reverse diffusion equation.
+        # x = 1/sqrt(alpha_t) * (x - beta_t / sqrt(1 - alpha_cumulative_t) * predicted_noise) + sqrt(beta_t) * z
+        # where alpha_t = 1 - beta_t, and alpha_cumulative_t is the cumulative product of alpha_t.
+
+        raise NotImplementedError("Implement the reverse diffusion process in the `reverse_diffusion` function.")
         ##### Exercise 3 #####
 
         if generate_video:

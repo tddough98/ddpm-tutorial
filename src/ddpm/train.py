@@ -1,10 +1,8 @@
-import torch
 from torch import amp
 from torchmetrics import MeanMetric
 from tqdm.auto import tqdm
 
 from .config import BaseConfig, TrainingConfig
-from .diffusion import forward_diffusion
 
 
 # Algorithm 1: Training
@@ -21,7 +19,7 @@ def train_one_epoch(  # noqa: D103
     loss_record = MeanMetric()
     model.train()
     ##### Exercise 2 #####
-    loss_fn = torch.nn.MSELoss()
+    #  Set up the loss function.
     ##### Exercise 2 #####
 
     with tqdm(total=len(loader), dynamic_ncols=True, leave=False) as tq:
@@ -30,12 +28,14 @@ def train_one_epoch(  # noqa: D103
             tq.update(1)
             max_timesteps = training_config.TIMESTEPS
             ##### Exercise 2 #####
-            ts = torch.randint(low=1, high=max_timesteps, size=(x0s.shape[0],), device=base_config.DEVICE)
-            xts, gt_noise = forward_diffusion(diffusion, x0s, ts)
+            # Sample random timesteps for each image in the batch.
+
+            # Sample noised images from the forward diffusion process.
 
             with amp.autocast(base_config.DEVICE.type):
-                pred_noise = model(xts, ts)
-                loss = loss_fn(gt_noise, pred_noise)
+                raise NotImplementedError("Implement the loss in the `train_one_epoch` function.")
+                # Predict the noise in the noised images using the model
+                # Compute the loss between the predicted noise and the ground truth noise.
             ##### Exercise 2 #####
 
             optimizer.zero_grad(set_to_none=True)

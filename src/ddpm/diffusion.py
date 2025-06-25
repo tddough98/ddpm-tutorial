@@ -17,29 +17,37 @@ class SimpleDiffusion:  # noqa: D101
     def initialize(self):
         """Initialize the noise schedule."""
         ##### Exercise 1a #####
+        raise NotImplementedError("Implement the variance schedule in Simple Diffusion.")
         self.beta = self.get_betas()
-        self.alpha = 1 - self.beta
-
-        self.sqrt_beta = torch.sqrt(self.beta)
-        self.alpha_cumulative = torch.cumprod(self.alpha, dim=0)
-        self.sqrt_alpha_cumulative = torch.sqrt(self.alpha_cumulative)
-        self.one_by_sqrt_alpha = 1.0 / torch.sqrt(self.alpha)
-        self.sqrt_one_minus_alpha_cumulative = torch.sqrt(1 - self.alpha_cumulative)
+        self.alpha = None
+        self.sqrt_beta = None
+        self.alpha_cumulative = None
+        self.sqrt_alpha_cumulative = None
+        self.one_by_sqrt_alpha = None
+        self.sqrt_one_minus_alpha_cumulative = None
         ##### Exercise 1a #####
 
     def get_betas(self, beta_start=1e-4, beta_end=0.02):
-        """Linear schedule, proposed in original ddpm paper"""
-        ##### Exercise 1a #####
+        """Linear schedule, proposed in original ddpm paper.
+
+        Parameters
+        ----------
+            beta_start : float, optional
+                The starting value of beta, by default 1e-4.
+            beta_end : float, optional
+                The ending value of beta, by default 0.02.
+
+        Returns
+        -------
+        torch.Tensor
+            A tensor containing the beta values for each diffusion timestep.
+            The shape of the tensor is (num_diffusion_timesteps,).
+        """
         scale = 1000 / self.num_diffusion_timesteps
-        beta_start = scale * beta_start
-        beta_end = scale * beta_end
-        return torch.linspace(
-            beta_start,
-            beta_end,
-            self.num_diffusion_timesteps,
-            dtype=torch.float32,
-            device=self.device,
-        )
+        beta_start = beta_start * scale
+        beta_end = beta_end * scale
+        ##### Exercise 1a #####
+        raise NotImplementedError("Implement the beta schedule in the `get_betas` function.")
         ##### Exercise 1a #####
 
 
@@ -75,10 +83,14 @@ def forward_diffusion(diffusion: SimpleDiffusion, x0: torch.Tensor, timesteps: t
     """
     ##### Exercise 1b #####
     # Hint: use get to index and reshape the noise schedule tensors
-    eps = torch.randn_like(x0)  # Noise
-    mean = get(diffusion.sqrt_alpha_cumulative, t=timesteps) * x0  # Image scaled
-    std_dev = get(diffusion.sqrt_one_minus_alpha_cumulative, t=timesteps)  # Noise scaled
-    sample = mean + std_dev * eps  # scaled inputs * scaled noise
+    # Sample noise
 
-    return sample, eps  # return ... , gt noise --> model predicts this)
+    # Scale image and noise according to the diffusion process
+
+    # Add noise to the scaled image to get the noised sample
+
+    # Model will learn to predict the noise from the noised sample.
+    # Return (noised sample, ground truth noise)
+
+    raise NotImplementedError("Implement the forward diffusion process in the `forward_diffusion` function.")
     ##### Exercise 1b #####
