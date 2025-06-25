@@ -22,8 +22,18 @@ classifiers = [
 ]
 dependencies = [
   "anndata",
+  "ipython",
+  "jupyterlab",
+  "matplotlib",
+  "numpy",
+  "opencv-python",
+  "pillow",
   # for debug logging (referenced from the issue template)
   "session-info2",
+  "torch",
+  "torchmetrics",
+  "torchvision",
+  "tqdm",
 ]
 optional-dependencies.dev = [ "pre-commit", "twine>=4.0.2" ]
 optional-dependencies.doc = [
