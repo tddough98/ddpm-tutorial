@@ -27,6 +27,7 @@ def reverse_diffusion(model, sd, timesteps=1000, img_shape=(3, 64, 64), num_imag
         position=0,
         leave=False,
     ):
+        ##### Exercise 3 #####
         ts = torch.ones(num_images, dtype=torch.long, device=device) * time_step
         z = torch.randn_like(x) if time_step > 1 else torch.zeros_like(x)
 
@@ -40,6 +41,7 @@ def reverse_diffusion(model, sd, timesteps=1000, img_shape=(3, 64, 64), num_imag
             one_by_sqrt_alpha_t * (x - (beta_t / sqrt_one_minus_alpha_cumulative_t) * predicted_noise)
             + torch.sqrt(beta_t) * z
         )
+        ##### Exercise 3 #####
 
         if generate_video:
             x_inv = inverse_transform(x).type(torch.uint8)
