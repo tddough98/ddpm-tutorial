@@ -10,8 +10,8 @@ class BaseConfig:  # noqa: D101
     DATASET = "MNIST"  #  "MNIST", "Cifar-10", "Cifar-100", "Flowers"
 
     # For logging inferece images and saving checkpoints.
-    root_log_dir = os.path.join("Logs_Checkpoints", "Inference")
-    root_checkpoint_dir = os.path.join("Logs_Checkpoints", "checkpoints")
+    root_log_dir = os.path.join("Logs_Checkpoints", DATASET, "Inference")
+    root_checkpoint_dir = os.path.join("Logs_Checkpoints", DATASET, "checkpoints")
 
     # Current log and checkpoint directory.
     log_dir = "version_0"
