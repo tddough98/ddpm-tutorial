@@ -3,7 +3,7 @@ model:
   denoiser_module:
     _target_: ddpm_tutorial.ddpm.model.unet.UNetTimeStep
     channels:
-    - 1
+    - 3
     - 32
     - 64
     - 64
@@ -44,20 +44,20 @@ scheduler:
   beta_end: 0.005
   T: ${noise_steps}
 dataset:
-  width: 28
-  height: 28
-  channels: 1
+  width: 32
+  height: 32
+  channels: 3
   num_classes: 10
   files_location: ~/.cache/torchvision_dataset
   train:
-    _target_: torchvision.datasets.MNIST
+    _target_: torchvision.datasets.CIFAR10
     root: ${dataset.files_location}
     train: true
     download: true
     transform:
       _target_: torchvision.transforms.ToTensor
   val:
-    _target_: torchvision.datasets.MNIST
+    _target_: torchvision.datasets.CIFAR10
     root: ${dataset.files_location}
     train: false
     download: true

@@ -255,7 +255,13 @@ class GaussianDDPM(pl.LightningModule):
         return X_noise
 
     def on_fit_start(self) -> None:  # noqa: D102
-        self.alphas_hat: torch.FloatTensor = self.alphas_hat.to(self.device)
-        self.alphas: torch.FloatTensor = self.alphas.to(self.device)
+        self.alphas_hat = self.alphas_hat.to(self.device)
+        self.alphas = self.alphas.to(self.device)
         self.betas = self.betas.to(self.device)
         self.betas_hat = self.betas_hat.to(self.device)
+
+    def on_fit_end(self) -> None:  # noqa: D102
+        self.alphas_hat = self.alphas_hat.cpu()
+        self.alphas = self.alphas.cpu()
+        self.betas = self.betas.cpu()
+        self.betas_hat = self.betas_hat.cpu()
