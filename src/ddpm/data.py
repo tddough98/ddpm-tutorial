@@ -87,8 +87,8 @@ def frames2vid(images, save_path):  # noqa: D103
 
     #     fourcc = cv2.VideoWriter_fourcc(*'XVID')
     #     fourcc = 0
-    fourcc = cv2.VideoWriter_fourcc(*"mp4v")
-    video = cv2.VideoWriter(save_path, fourcc, 25, (WIDTH, HEIGHT))
+    fourcc = cv2.VideoWriter_fourcc(*"avc1")
+    video = cv2.VideoWriter(save_path, fourcc, 60, (WIDTH, HEIGHT))
 
     # Appending the images to the video one by one
     for image in images:

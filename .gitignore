@@ -20,3 +20,6 @@ __pycache__/
 /docs/_build/
 code
 vscode_cli.tar.gz
+
+inference_results/
+Logs_Checkpoints/
